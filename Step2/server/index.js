@@ -2,6 +2,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const { error } = require('console');
 
 // Section 2
 const app = express();
@@ -17,6 +18,33 @@ app.get('/users', (req, res) => {
         .then(response => {
             res.send(response.data);
         });
+});
+
+app.post('/api/user/insert',(req,res) => {
+    const post_data = {
+        records: [pre_post_data]
+    };
+
+    axios.post(
+        updateCallTaskUrl,
+        post_data
+    )
+    .then ((response) => {
+        if (response.data.results != null ) {
+            responseData = response.data.results(0);
+
+            if(responseData.isSuccess) {
+                console.log("Success : " + responseData.isSuccess);
+            }else{
+                console.log("fail");
+            }
+        }else{
+            console.log("");
+        }
+            console.log("END")
+    },(error) => {
+        console.log(error);
+    });
 });
 
 // Section 4

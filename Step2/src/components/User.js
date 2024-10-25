@@ -1,29 +1,22 @@
 import React from 'react';
 
-const User = ({ name, location, email, picture, login, createUser }) => {
+const User = ({ gender ,name, location, email, picture, login, createUser }) => {
 
     async function createUser() {
-/*
-        gender,
-        name_title ,
-        name_first,
-        name_last,
-        country,
-        email,
-        username,
-        password ,
-        picture_large,
-        picture_medium,
-        picture_thumbnail
-*/
+
         const token = '1234567890';
         const body = new FormData();
+        body.set("gender", gender);
+        body.set("name_title", name.title);
         body.set("name_first", name.first);
         body.set("name_last", name.last);
+        body.set("country", location.country)
         body.set("email", email);
         body.set("username", login.username);
         body.set("password", login.password);
+        body.set("picture_large", picture.large);
         body.set("picture_medium", picture.medium);
+        body.set("picture_thumbnail", picture.thumbnail);
 
         const response = await fetch(`http://localhost:4000/api/user/insert`, {
             method: 'POST',
@@ -35,7 +28,6 @@ const User = ({ name, location, email, picture, login, createUser }) => {
           alert("User list was inserted");
         //return await response.json();
     }
-
 
     return (
         <div className="random-user">

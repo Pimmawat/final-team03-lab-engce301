@@ -1,4 +1,3 @@
-
 const hapi = require('@hapi/hapi');
 const env = require('./env.js');
 const Movies = require('./respository/movie');

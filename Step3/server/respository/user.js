@@ -3,14 +3,14 @@ const env = require('../env.js');
 const config = require('../dbconfig.js')[env];
 
 
-async function getUserSearch(username_text, password_text) {
+async function getUserSearch(email_text, password_text) {
 
     var Query;
     var pool = mysql.createPool(config);
 
     return new Promise((resolve, reject) => {
 
-        Query = `SELECT username, password FROM users WHERE (username LIKE '%${username_text}%') AND (password LIKE '%${password_text}%')`;
+        Query = `SELECT email, password FROM users WHERE (email LIKE '%${email_text}%') AND (password LIKE '%${password_text}%')`;
 
         pool.query(Query, function (error, results, fields) {
             if (error) throw error;
@@ -107,11 +107,7 @@ async function postUser(
                     messsage: 'User list was inserted',
                 });
             }
-
-
         });
-
-
     });
 
 

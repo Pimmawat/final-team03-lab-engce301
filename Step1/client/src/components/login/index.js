@@ -14,14 +14,12 @@ function Login({ onLoginSuccessful }) {
     event.preventDefault();
     setHasError(false);
     const loginResult = await login({ email, password });
-    if (!loginResult) setHasError(true);
-    else {
-      const { name, token } = loginResult;
-      // Save user IDs on local storage
+    if (loginResult.statusCode === 200 ){
+      const {name, token } = loginResult;
       localStorage.setItem("name", name);
       localStorage.setItem("token", token);
       onLoginSuccessful();
-    }
+    }else setHasError(true);
   };
 
   return (
